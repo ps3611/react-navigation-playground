@@ -3,9 +3,33 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Home'
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Home',
+      headerRight: (
+        <Button
+          onPress={() => {navigation.getParam('increaseCount')}}
+          title="+1"
+          color="#fff"
+        />
+      ),
+    }
   }
+
+  componentDidMount() {
+    console.log('mount!');
+    console.log(this.state.count);
+    this.props.navigation.setParams({ increaseCount: this._increaseCount });
+  }
+
+  state = {
+    count: 0,
+  };
+
+  _increaseCount = () => {
+    console.log(this.state.count);
+    this.setState({ count: this.state.count + 1 })
+  };
 
   render() {
     return (
