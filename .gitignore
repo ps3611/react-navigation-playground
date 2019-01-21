@@ -59,3 +59,15 @@ typings/
 
 # next.js build output
 .next
+
+# other
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p12
+*.key
+*.mobileprovision
+expo/
+.expo/
+.DS_Store
