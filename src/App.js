@@ -3,6 +3,10 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Home'
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -20,8 +24,13 @@ class HomeScreen extends React.Component {
 }
 
 class DetailsScreen extends React.Component {
-  render() {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('itemId','NO-ID').toString(),
+    };
+  };
 
+  render() {
     const { navigation } = this.props;
     const itemId = navigation.getParam('itemId','NO-ID');
     const otherParam = navigation.getParam('otherParam','some default value');
@@ -56,7 +65,16 @@ const AppNavigator = createStackNavigator(
     Details: DetailsScreen,
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    defaultNavigationOptions: {
+     headerStyle: {
+       backgroundColor: '#f4511e',
+     },
+     headerTintColor: '#fff',
+     headerTitleStyle: {
+       fontWeight: 'bold',
+     },
+   },
   }
 )
 
